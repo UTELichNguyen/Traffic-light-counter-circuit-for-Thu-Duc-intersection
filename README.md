@@ -1,33 +1,57 @@
-# Traffic Light Control System - Circuit Details
+# 🚦 Hệ thống Đèn Giao Thông Ngã Tư Thủ Đức (Proteus Simulation)
 
-## 1. Schematic Diagram - Block 1 (Sơ đồ nguyên lý - Khối 1)
-Dưới đây là sơ đồ nguyên lý của khối mạch xử lý chính (Main Processing Block). Khối này đảm nhiệm chức năng đếm và xử lý logic cho hệ thống đèn.
+> **Mô phỏng hệ thống điều khiển tín hiệu giao thông thực tế tại ngã tư Thủ Đức, TP.HCM sử dụng linh kiện Logic số (Digital Logic).**
 
-<img width="1219" height="791" alt="Screenshot 2025-12-26 225220" src="https://github.com/user-attachments/assets/3bcad8f5-2908-4170-8dd1-0a929ebb59d7" />
+![Status](https://img.shields.io/badge/Status-Completed-success)
+![Tool](https://img.shields.io/badge/Simulation-Proteus_8.17+-blue)
+![Type](https://img.shields.io/badge/Type-Digital_Logic-orange)
 
-
-**Mô tả hoạt động:** Mạch sử dụng kết hợp các IC đếm (74192, 7493) và IC cộng/giải mã (74LS83, 74HCT238) để điều khiển trạng thái logic.
+## 👨‍💻 Thông tin Sinh viên
+* **Họ và tên:** Nguyễn Hồng Lịch
+* **MSSV:** 24161298
+* **Lớp/Khóa:** 2024
+* **Trường:** Đại học Công nghệ Kỹ thuật TP.HCM (HCMUTE)
+* **Ngành:** Công nghệ Kỹ thuật Điện tử Viễn thông
 
 ---
 
-## 2. Bill of Materials (Danh sách linh kiện)
-Dưới đây là bảng thống kê linh kiện được sử dụng trong Block 1:
+## 📝 Giới thiệu Dự án
+Dự án này là bài tập lớn môn học, nhằm mục đích thiết kế và mô phỏng hệ thống đèn giao thông tại nút giao thông trọng điểm **Ngã tư Thủ Đức**. Hệ thống điều khiển luồng giao thông phức tạp bao gồm các hướng:
+* Xa lộ Hà Nội (Song hành & Cầu vượt)
+* Võ Văn Ngân
+* Lê Văn Việt
 
-| Loại Linh Kiện (Category) | Tên Linh Kiện (Name) | Chức năng chính (Description) |
+Điểm đặc biệt của dự án là **không sử dụng Vi điều khiển (Microcontroller)** lập trình sẵn. Thay vào đó, toàn bộ logic điều khiển, bộ đếm thời gian và giải mã hiển thị đều được xây dựng từ các **IC số cơ bản (74xx Series)**, giúp minh họa rõ nét bản chất của mạch điện tử số.
+
+## ⚙️ Nguyên lý hoạt động (Sơ đồ khối)
+Hệ thống được thiết kế dựa trên các khối chức năng chính như sơ đồ dưới đây. Tín hiệu xung nhịp (Clock) được tạo ra và đưa vào các bộ đếm lùi, sau đó qua khối logic để điều khiển đèn và hiển thị ra LED 7 đoạn.
+
+![So_Do_Khoi](https://github.com/user-attachments/assets/c7877037-04a2-41ad-90bf-7d923b2be542)
+
+
+## 📸 Kết quả Mô phỏng
+Dưới đây là giao diện mô phỏng thực tế trên Proteus. Hệ thống hiển thị đầy đủ thời gian đếm ngược và trạng thái đèn (Xanh - Vàng - Đỏ) cho tất cả các hướng của ngã tư.
+
+![Ket_qua](https://github.com/user-attachments/assets/cd1e095d-31fc-45bd-ba33-193d76237361)
+
+
+## 🛠️ Danh sách linh kiện chính
+Dựa trên thiết kế, mạch sử dụng các nhóm linh kiện:
+
+| Tên Linh Kiện | Mã IC | Chức năng |
 | :--- | :--- | :--- |
-| **Counters (IC Đếm)** | `74192` | Synchronous Up/Down Decade Counter (Đếm lên/xuống) |
-| | `7493` | 4-bit Binary Counter (Bộ đếm nhị phân 4-bit) |
-| **Logic & Math ICs** | `74LS83` | 4-bit Binary Full Adder (Bộ cộng toàn phần 4-bit) |
-| | `74HCT238` | 3-to-8 Line Decoder/Demultiplexer (Giải mã 3 sang 8) |
-| | `74LS247` | BCD to 7-Segment Decoder (Giải mã LED 7 đoạn) |
-| | `74LS386` | Quad 2-Input XOR Gates |
-| **Logic Gates** | `AND`, `OR`, `OR_3` | Các cổng logic cơ bản |
-| | `NOT`, `XOR` | Cổng đảo và cổng XOR |
-| **Display & I/O** | `7SEG-BCD-GRN` | LED 7 đoạn (Màu xanh) |
-| | `TRAFFIC LIGHTS` | Mô hình đèn giao thông |
-| | `BUTTON` | Nút nhấn điều khiển |
-| **Passive/Others** | `RES` (Resistor) | Điện trở |
-| | `CAPACITOR` | Tụ điện |
-| | `LOGICSTATE` | Đầu vào trạng thái Logic (0/1) |
+| **Bộ đếm** | `74192` | Đếm lùi thời gian (BCD Counter) |
+| **Bộ cộng** | `74LS83` | Tính toán giá trị nạp |
+| **Giải mã LED** | `74LS247` | Hiển thị ra LED 7 đoạn |
+| **Giải mã địa chỉ**| `74HCT238`| Điều khiển luồng tín hiệu |
+| **Logic** | `AND/OR/XOR` | Xử lý trạng thái đèn |
 
+## 🚀 Hướng dẫn chạy mô phỏng
+Để chạy được dự án này trên máy tính của bạn:
+
+1.  **Yêu cầu phần mềm:** Cài đặt phần mềm **Proteus 8 Professional** (Bắt buộc phiên bản **8.17 trở lên** để tránh lỗi thư viện).
+2.  **Tải dự án:**
+    ```bash
+    https://github.com/UTELichNguyen/Traffic-light-counter-circuit-for-Thu-Duc-intersection
+    ```
 ---
